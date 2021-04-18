@@ -1,0 +1,75 @@
+<!--
+    Author : Bharathimohan Ramamurthy
+    CreatedDate : 08/11/2017
+    Component Name : carsList.cmp
+-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" controller="carController">
+
+    <!-- INIT Handler -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <!-- Car[] attribute - Used to hold values from Car__c object and to use for Iteration -->
+    <aura:attribute name="carList" type="Car__c[]"/>
+
+    <!-- searchFilter attribute - To hold search parameters and pass to Apex -->
+    <aura:attribute name="searchKey" type="String"/>
+    <aura:attribute name="isLargeTile" type="Boolean" default="true"/>
+
+    <!-- Paging Attributes - STARTS -->
+    <aura:attribute name="pageSizeOptions" type="integer[]" default="6,12,18,24,30"/>
+    <aura:attribute name="tilesinRow" type="Integer" default="6"/>
+    <aura:attribute name="pageSize" type="integer" default="6"/>
+    <aura:attribute name="currentPage" type="integer" default="1"/>
+    <aura:attribute name="totalPages" type="integer" default="0"/>
+    <aura:attribute name="totalRecords" type="integer" default="0"/>
+    <aura:handler event="c:carPaginatorEvent" action="{!c.handlePagination}"/>
+    <aura:handler event="c:carSearchEvent" action="{!c.handleSearch}"/>
+    <!-- Paging Attributes - ENDS -->
+
+
+    <!-- No Records Message Display - STARTS -->
+    <aura:if isTrue="{!v.totalRecords==0}">
+        <ui:message title="No Cars found!" severity="info" closable="false"/>
+    </aura:if>
+    <!-- No Records Message Display - ENDS -->
+
+    <!-- Spinner Logic - STARTS -->
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+           <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+             <span class="slds-assistive-text">Loading</span>
+             <div class="slds-spinner__dot-a"></div>
+             <div class="slds-spinner__dot-b"></div>
+           </div>
+        </div>
+     </aura:if>
+    <!-- Spinner Logic - ENDS -->
+    
+    <aura:if isTrue="{!v.totalRecords>0}">
+    
+        <!-- Paging Display - STARTS -->
+        <c:carPaginator currentPage="{!v.currentPage}" totalPages="{!v.totalPages}" totalRecords="{!v.totalRecords}" pageSizeOptions="{!v.pageSizeOptions}" pageSize="{!v.pageSize}"/>
+        <!-- Paging Display - ENDS -->
+
+        <!-- Cars Display - STARTS -->
+        <div>
+            <ul aura:id="list" class="slds-grid slds-grid--pull-padded slds-wrap"
+                onmousemove="" onmouseleave="">
+                <aura:iteration items="{!v.carList}" var="car" indexVar="index">
+                    <c:car car="{!car}" index="{!index}" isLargeTile="{!v.isLargeTile}" tilesinRow="{!v.tilesinRow}"/>
+                </aura:iteration>
+            </ul>
+        </div>
+        <!-- Cars Display - ENDS -->
+
+        <!-- Paging Display - STARTS -->
+        <c:carPaginator currentPage="{!v.currentPage}" totalPages="{!v.totalPages}" totalRecords="{!v.totalRecords}" pageSizeOptions="{!v.pageSizeOptions}" pageSize="{!v.pageSize}"/>
+        <!-- Paging Display - ENDS -->
+
+    </aura:if>
+
+</aura:component>

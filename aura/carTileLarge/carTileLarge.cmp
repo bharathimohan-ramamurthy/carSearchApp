@@ -1,0 +1,30 @@
+<!--
+    Author : Bharathimohan Ramamurthy
+    CreatedDate : 08/11/2017
+    Component Name : carTileLarge.cmp
+-->
+<aura:component >
+    
+    <aura:attribute name="tileTitle" type="String"/>
+    <aura:attribute name="tileImageSrc" type="String"/>
+    <aura:attribute name="tileDescription" type="String"/>
+
+    <div class="car-tile slds-box slds-theme_default slds-truncate">
+
+        <div class="car-tile-image" style="{!'background-image: url(' + v.tileImageSrc + ')'}">
+        </div>
+
+        <div class="car-tile__body">
+            <div class="car-tile-title">
+                <h4 class="car-tile__title" title="{!v.tileTitle}">
+                    {!v.tileTitle}
+                </h4>
+            </div>
+
+            <div class="slds-app-launcher__tile-body">
+                <p>{!v.tileDescription}</p>
+            </div>
+        </div>
+
+    </div>
+</aura:component>

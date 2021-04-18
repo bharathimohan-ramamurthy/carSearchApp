@@ -1,0 +1,19 @@
+<!--
+    Author : Bharathimohan Ramamurthy
+    CreatedDate : 08/11/2017
+    Component Name : carSearchApp.cmp
+-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+        <article class="slds-card">
+            <div class="slds-box">
+                <!-- Search Bar Component Display - STARTS -->
+                <c:carSearchBar />
+                <!-- Search Bar Component Display - ENDS -->
+            </div>
+                <div class="slds-card__body car-list">
+                    <!-- Cars List + Pagination Display  - STARTS -->
+                    <c:carsList />
+                    <!-- Cars List + Pagination Display  - ENDS -->
+                </div>
+        </article>
+</aura:component>

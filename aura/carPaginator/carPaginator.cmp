@@ -1,0 +1,53 @@
+<!--
+    Author : Bharathimohan Ramamurthy
+    CreatedDate : 08/11/2017
+    Component Name : carPaginator.cmp
+-->
+<aura:component >
+
+    <!-- Paginator Attributes - STARTS -->
+    <aura:attribute name="currentPage" type="integer"/>
+    <aura:attribute name="totalPages" type="integer"/>
+    <aura:attribute name="totalRecords" type="integer"/>
+    <aura:attribute name="pageSizeOptions" type="integer[]"/>
+    <aura:attribute name="pageSize" type="integer"/>
+    <!-- Paginator Attributes - ENDS -->
+    
+    <!-- Paginator Body - STARTS -->
+    <div class="slds-grid slds-wrap slds-grow slds-scrollable--y" role="main">
+
+        <!-- Page Size Drop Down - STARTS -->
+        <div class="slds-size--1-of-1 slds-medium-size--3-of-12 slds-large-size--1-of-12 car-page-size-align">
+
+            <ui:inputSelect aura:id="pageList" change="{!c.handlePagination}" value="{!v.pageSize}">
+                <aura:iteration var="p" items="{!v.pageSizeOptions}">
+                    <ui:inputSelectOption text="{!p}" label="{!p}"/>
+                </aura:iteration>
+            </ui:inputSelect>
+
+        </div>
+        <!-- Page Size Drop Down - ENDS -->
+
+        <!-- Pagination - STARTS -->
+        <div class="slds-shrink-none slds-size--1-of-1 slds-medium-size--9-of-12 slds-large-size--11-of-12" role="complementary">
+            
+            <div class="car-paginator-align">
+                <aura:if isTrue="{!v.currentPage > 1}">
+                    <lightning:buttonIcon iconName="utility:back" variant="border-filled" onclick="{!c.firstPage}"/>
+                    <lightning:buttonIcon iconName="utility:left" variant="border-filled" onclick="{!c.previousPage}"/>
+                </aura:if>
+                
+                <span class="car-page-info">{!v.totalRecords} Cars • Page {!v.currentPage} of {!v.totalPages}</span>
+
+                <aura:if isTrue="{!v.currentPage &lt; v.totalPages}">
+                    <lightning:buttonIcon iconName="utility:right" variant="border-filled" onclick="{!c.nextPage}"/>
+                    <lightning:buttonIcon iconName="utility:forward" variant="border-filled" onclick="{!c.lastPage}"/>
+                </aura:if>
+            </div>
+
+        </div>
+        <!-- Pagination - STARTS -->
+
+    </div>
+    <!-- Paginator Body - ENDS -->
+</aura:component>

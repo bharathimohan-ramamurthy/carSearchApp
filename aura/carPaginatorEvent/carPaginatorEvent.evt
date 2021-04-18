@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Event template">
+    <aura:attribute name="direction" type="String"/>
+    <aura:attribute name="pageSize" type="String"/>
+    <aura:attribute name="pageNav" type="String"/>
+</aura:event>

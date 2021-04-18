@@ -1,0 +1,32 @@
+<!--
+    Author : Bharathimohan Ramamurthy
+    CreatedDate : 08/11/2017
+    Component Name : car.cmp
+-->
+<aura:component >
+    <aura:attribute name="car" type="Car__c"/>
+    <aura:attribute name="isLargeTile" type="Boolean" default="true"/>
+    <aura:attribute name="index" type="Integer"/>
+    <aura:attribute name="tilesinRow" type="Integer"/>
+
+    <aura:registerEvent name="navigateToSObject" type="force:navigateToSObject"/>
+    
+    <li aura:id="tile" style="padding:0.2rem;" class="{!'slds-p-horizontal--medium slds-size--1-of-1 slds-medium-size--1-of-'+v.tilesinRow}" data-id="{#v.index}">
+    
+        <a onclick="{!c.navigateToRecord}" style="cursor: pointer;text-decoration:none;">
+
+            <aura:if isTrue="{!not(v.isLargeTile)}">
+                <c:carTileSmall tileTitle="{!v.car.Name}"
+                    tileImageSrc="{!$Resource.Car_Images+'/'+v.car.Image_Tag__c+'.jpg'}"
+                    tileDescription="{!v.car.Production_Year_Start__c+' - '+v.car.Production_Year_End__c}"/>
+                <aura:set attribute="else">
+                    <c:carTileLarge tileTitle="{!v.car.Name}"
+                    tileImageSrc="{!$Resource.Car_Images+'/'+v.car.Image_Tag__c+'.jpg'}"
+                    tileDescription="{!v.car.Production_Year_Start__c+' - '+v.car.Production_Year_End__c}"/>
+                </aura:set>
+            </aura:if>
+
+        </a>
+
+    </li>
+</aura:component>

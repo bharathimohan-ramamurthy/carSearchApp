@@ -1,0 +1,49 @@
+<!--
+    Author : Bharathimohan Ramamurthy
+    CreatedDate : 08/11/2017
+    Component Name : carSearchBar.cmp
+-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
+
+	<!-- String to hold Search text -->
+	<aura:attribute name="searchKey" type="String"/>
+
+	<!-- Boolean to toggle Tile size -->
+	<aura:attribute name="isLargeTile" type="Boolean" default="true"/>
+
+	<div class="slds-grid slds-grid--align-spread">
+		<div class="slds-col">
+
+			<div style="display:inline-block;">
+
+				<!-- Search Bar Input Display -->
+	            <input aura:id="carName" type="text" class="slds-input" placeholder="Search Car Name" onkeypress="{!c.searchCar}"/>
+
+			</div>
+
+			<div style="display:inline-block;">
+
+				<!-- Button to clear Search Input -->
+				<lightning:buttonIcon alternativeText="Clear" 
+					iconName="utility:close" 
+					onclick="{!c.clearSearch}" 
+					class="slds-grid--vertical-align-center"/>
+
+			</div>
+			
+		</div>
+		<div class="slds-col">
+
+			<!-- Tile Size Toggle Checkbox Display -->
+			<lightning:input type="checkbox" 
+						label="Large Tile?" 
+						name="tile" 
+						checked="{!v.isLargeTile}" 
+						onchange="{!c.toggleTile}" 
+						class="slds-grid--vertical-align-center"/>
+						
+		</div>
+
+    </div>
+
+</aura:component>

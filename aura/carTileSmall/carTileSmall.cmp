@@ -1,0 +1,24 @@
+<!--
+    Author : Bharathimohan Ramamurthy
+    CreatedDate : 08/11/2017
+    Component Name : carTileSmall.cmp
+-->
+<aura:component >
+
+    <aura:attribute name="tileTitle" type="String"/>
+    <aura:attribute name="tileImageSrc" type="String"/>
+    <aura:attribute name="tileDescription" type="String"/>
+
+    <div class="slds-app-launcher__tile slds-text-link--reset slds-truncate">
+            <div class="slds-app-launcher__tile-figure">
+            	<span class="slds-avatar slds-avatar--large slds-align--absolute-center">
+            		<img src="{!v.tileImageSrc}" class="smallTile"/>
+            	</span>
+            </div>
+            <div class="slds-app-launcher__tile-body">
+                <span>{!v.tileTitle}</span>
+                <p>{!v.tileDescription}</p>
+            </div>
+    </div>
+
+</aura:component>

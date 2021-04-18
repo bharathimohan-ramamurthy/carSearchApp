@@ -1,0 +1,26 @@
+.THIS.slds-box.car-tile {
+    padding: 0px;
+    width: 100%;
+    overflow: hidden;
+}
+.THIS .car-tile-image {
+    height: 180px;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.THIS .car-cursor--pointer {
+    cursor: pointer;
+}
+.THIS .car-tile__body {
+    padding: 1rem;
+    text-align: center;
+}
+.THIS .car-tile-title {
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
